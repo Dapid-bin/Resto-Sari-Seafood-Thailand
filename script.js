@@ -1,109 +1,101 @@
-// DATABASE MENU LENGKAP SARI SEAFOOD THAILAND (94 ITEM)
 const menuItems = [
-    // ========== HIDANGAN LAUT (SEAFOOD) ==========
-    { id: 1, name: "Paket Seafood Mix S (1-2 Orang)", price: 65000, category: "seafood", description: "Isi: Kerang ijo, Kerang dara, Cumi, Udang", rating: 4.7, page: 1 },
-    { id: 2, name: "Paket Seafood Mix M (2-3 Orang)", price: 100000, category: "seafood", description: "Isi: Kepiting, Kerang ijo, Kerang dara, Cumi, Udang", rating: 4.8, page: 1 },
-    { id: 3, name: "Paket Seafood Mix L (3-4 Orang)", price: 200000, category: "seafood", description: "Isi: Kepiting, Kerang ijo, Kerang dara, Cumi, Udang", rating: 4.9, page: 1 },
-    { id: 4, name: "Udang Saos Padang", price: 40000, category: "seafood", description: "Udang segar dengan saus padang khas", rating: 4.5, page: 1 },
-    { id: 5, name: "Udang Telor Asin", price: 40000, category: "seafood", description: "Udang dengan telur asin gurih", rating: 4.6, page: 1 },
-    { id: 6, name: "Udang Lada Garam", price: 40000, category: "seafood", description: "Udang dengan lada garam khas", rating: 4.4, page: 1 },
-    { id: 7, name: "Udang Saos Tiram", price: 40000, category: "seafood", description: "Udang dengan saus tiram", rating: 4.3, page: 1 },
-    { id: 8, name: "Udang Balado", price: 40000, category: "seafood", description: "Udang dengan sambal balado", rating: 4.7, page: 1 },
-    { id: 9, name: "Udang Goreng Tepung", price: 38000, category: "seafood", description: "Udang crispy goreng tepung", rating: 4.4, page: 1 },
-    { id: 10, name: "Cumi Goreng Tepung", price: 35000, category: "seafood", description: "Cumi goreng tepung crispy", rating: 4.3, page: 1 },
-    { id: 11, name: "Cumi Lada Garam", price: 35000, category: "seafood", description: "Cumi dengan lada garam", rating: 4.5, page: 1 },
-    { id: 12, name: "Cumi Telor Asin", price: 35000, category: "seafood", description: "Cumi dengan telur asin", rating: 4.4, page: 1 },
-    { id: 13, name: "Cumi Saos Padang", price: 35000, category: "seafood", description: "Cumi dengan saus padang", rating: 4.6, page: 1 },
-    { id: 14, name: "Kerang Kepa Saos Padang", price: 25000, category: "seafood", description: "Kerang kepa saus padang", rating: 4.2, page: 1 },
-    { id: 15, name: "Kerang Kepa Saos Tiram", price: 25000, category: "seafood", description: "Kerang kepa saus tiram", rating: 4.2, page: 1 },
-    { id: 16, name: "Kerang Batik Saos Padang", price: 25000, category: "seafood", description: "Kerang batik saus padang", rating: 4.3, page: 1 },
-    { id: 17, name: "Kerang Batik Saos Tiram", price: 25000, category: "seafood", description: "Kerang batik saus tiram", rating: 4.3, page: 1 },
-    { id: 18, name: "Kerang Ijo Saos Padang", price: 25000, category: "seafood", description: "Kerang hijau saus padang", rating: 4.4, page: 1 },
-    { id: 19, name: "Kerang Ijo Saos Tiram", price: 25000, category: "seafood", description: "Kerang hijau saus tiram", rating: 4.4, page: 1 },
-    
-    // ========== IKAN (GORENG, BAKAR & STEAM) ==========
-    { id: 20, name: "Gurame Bakar Cabe Ijo", price: 35000, category: "ikan", description: "Gurame bakar dengan sambal cabe ijo", rating: 4.7, page: 2 },
-    { id: 21, name: "Gurame Bakar Terasi", price: 35000, category: "ikan", description: "Gurame bakar dengan terasi", rating: 4.6, page: 2 },
-    { id: 22, name: "Gurame Bakar Kecap", price: 35000, category: "ikan", description: "Gurame bakar dengan kecap manis", rating: 4.5, page: 2 },
-    { id: 23, name: "Gurame Bakar Sambel Bawang", price: 35000, category: "ikan", description: "Gurame bakar sambal bawang", rating: 4.4, page: 2 },
-    { id: 24, name: "Gurame Bakar Rica-rica", price: 35000, category: "ikan", description: "Gurame bakar rica-rica khas Manado", rating: 4.6, page: 2 },
-    { id: 25, name: "Gurame Goreng Kering", price: 35000, category: "ikan", description: "Gurame goreng kering crispy", rating: 4.3, page: 2 },
-    { id: 26, name: "Gurame Saos Bangkok", price: 35000, category: "ikan", description: "Gurame dengan saus Bangkok", rating: 4.5, page: 2 },
-    { id: 27, name: "Gurame Telor Asin", price: 35000, category: "ikan", description: "Gurame dengan telur asin", rating: 4.6, page: 2 },
-    { id: 28, name: "Gurame Saos Mangga", price: 35000, category: "ikan", description: "Gurame dengan saus mangga", rating: 4.4, page: 2 },
-    { id: 29, name: "Gurame Sambel Matah Thailand", price: 35000, category: "ikan", description: "Gurame dengan sambal matah Thailand", rating: 4.7, page: 2 },
-    { id: 30, name: "Gurame Garam Thailand", price: 40000, category: "ikan", description: "Gurame dengan garam khas Thailand", rating: 4.8, page: 2 },
-    { id: 31, name: "Kakap Bakar Cabe Ijo", price: 14000, unit: "ons", category: "ikan", description: "Kakap bakar per ons", rating: 4.5, page: 2 },
-    { id: 32, name: "Kakap Bakar Terasi", price: 14000, unit: "ons", category: "ikan", description: "Kakap bakar dengan terasi", rating: 4.4, page: 2 },
-    { id: 33, name: "Kakap Bakar Kecap", price: 14000, unit: "ons", category: "ikan", description: "Kakap bakar dengan kecap", rating: 4.3, page: 2 },
-    { id: 34, name: "Kakap Bakar Sambel Bawang", price: 14000, unit: "ons", category: "ikan", description: "Kakap bakar sambal bawang", rating: 4.4, page: 2 },
-    { id: 35, name: "Kakap Bakar Rica-rica", price: 14000, unit: "ons", category: "ikan", description: "Kakap bakar rica-rica", rating: 4.5, page: 2 },
-    { id: 36, name: "Kakap Goreng Kering", price: 14000, unit: "ons", category: "ikan", description: "Kakap goreng kering per ons", rating: 4.3, page: 2 },
-    { id: 37, name: "Kakap Saos Bangkok", price: 14000, unit: "ons", category: "ikan", description: "Kakap saus Bangkok per ons", rating: 4.5, page: 2 },
-    { id: 38, name: "Kakap Telor Asin", price: 14000, unit: "ons", category: "ikan", description: "Kakap telur asin per ons", rating: 4.6, page: 2 },
-    { id: 39, name: "Kakap Saos Mangga", price: 14000, unit: "ons", category: "ikan", description: "Kakap saus mangga per ons", rating: 4.4, page: 2 },
-    { id: 40, name: "Kakap Steam Lemon", price: 14000, unit: "ons", category: "ikan", description: "Kakap steam lemon per ons", rating: 4.5, page: 2 },
-    { id: 41, name: "Kakap Steam Tomyum", price: 14000, unit: "ons", category: "ikan", description: "Kakap steam tomyum per ons", rating: 4.7, page: 2 },
-    { id: 42, name: "Kakap Steam Soya", price: 14000, unit: "ons", category: "ikan", description: "Kakap steam soya per ons", rating: 4.4, page: 2 },
-    { id: 43, name: "Ikan Kakap Baramundi Garam Thailand", price: 15000, unit: "ons", category: "ikan", description: "Kakap baramundi garam Thailand", rating: 4.8, page: 2 },
-    { id: 44, name: "Bawal Bakar", price: 85000, category: "ikan", description: "Bawal bakar semua varian", rating: 4.6, page: 2 },
-    { id: 45, name: "Nila Bakar", price: 25000, category: "ikan", description: "Nila bakar semua varian", rating: 4.3, page: 2 },
-    { id: 46, name: "Nila Goreng Kering", price: 35000, category: "ikan", description: "Nila goreng kering", rating: 4.2, page: 2 },
-    { id: 47, name: "Salem Bakar", price: 8000, unit: "ons", category: "ikan", description: "Salem bakar per ons", rating: 4.4, page: 2 },
-    
-    // ========== TOM YUM, BASIL & SALAD ==========
-    { id: 48, name: "Mama Tomyum Seafood", price: 45000, category: "tomyum", description: "Tomyum seafood spesial", rating: 4.8, page: 3 },
-    { id: 49, name: "Tom Yum Seafood", price: 40000, category: "tomyum", description: "Tom yum seafood", rating: 4.6, page: 3 },
-    { id: 50, name: "Tom Yum Ikan", price: 40000, category: "tomyum", description: "Tom yum ikan", rating: 4.5, page: 3 },
-    { id: 51, name: "Tom Yum Bakso Ayam", price: 40000, category: "tomyum", description: "Tom yum bakso ayam", rating: 4.4, page: 3 },
-    { id: 52, name: "Tom Yum Ayam", price: 35000, category: "tomyum", description: "Tom yum ayam", rating: 4.3, page: 3 },
-    { id: 53, name: "Tom Yum Udang", price: 30000, category: "tomyum", description: "Tom yum udang", rating: 4.5, page: 3 },
-    { id: 54, name: "Tom Yum Seafood Spesial", price: 40000, category: "tomyum", description: "Tom yum seafood spesial", rating: 4.7, page: 3 },
-    { id: 55, name: "Basil Ayam", price: 20000, category: "basil", description: "Ayam basil Thailand", rating: 4.4, page: 3 },
-    { id: 56, name: "Basil Crispy Ayam", price: 20000, category: "basil", description: "Ayam crispy basil", rating: 4.5, page: 3 },
-    { id: 57, name: "Basil Kerang Batik", price: 20000, category: "basil", description: "Kerang batik basil", rating: 4.3, page: 3 },
-    { id: 58, name: "Kwetiau Crispy Basil Ayam", price: 25000, category: "basil", description: "Kwetiau crispy basil ayam", rating: 4.6, page: 3 },
-    { id: 59, name: "Crispy Kacang Telor Asin", price: 15000, category: "basil", description: "Kacang crispy telur asin", rating: 4.2, page: 3 },
-    { id: 60, name: "Pepaya Salad", price: 15000, category: "salad", description: "Salad pepaya Thailand", rating: 4.3, page: 3 },
-    { id: 61, name: "Mangga Salad", price: 15000, category: "salad", description: "Salad mangga Thailand", rating: 4.4, page: 3 },
-    { id: 62, name: "Pepaya Salad Telor Asin", price: 18000, category: "salad", description: "Salad pepaya telur asin", rating: 4.5, page: 3 },
-    { id: 63, name: "Crispy Pepaya Seafood", price: 25000, category: "salad", description: "Pepaya crispy seafood", rating: 4.4, page: 3 },
-    { id: 64, name: "Yum Soun Seafood", price: 25000, category: "salad", description: "Yum soun seafood", rating: 4.3, page: 3 },
-    
-    // ========== SAYURAN & NASI ==========
-    { id: 65, name: "Capcay Udang", price: 20000, unit: "ekor", category: "sayuran", description: "Capcay dengan udang per ekor", rating: 4.4, page: 4 },
-    { id: 66, name: "Kailan Ayam", price: 18000, category: "sayuran", description: "Kailan dengan ayam", rating: 4.2, page: 4 },
-    { id: 67, name: "Brokoli Ayam", price: 18000, category: "sayuran", description: "Brokoli dengan ayam", rating: 4.3, page: 4 },
-    { id: 68, name: "Capcay Ayam", price: 18000, category: "sayuran", description: "Capcay dengan ayam", rating: 4.2, page: 4 },
-    { id: 69, name: "Kailan Bawang Putih", price: 15000, category: "sayuran", description: "Kailan bawang putih", rating: 4.1, page: 4 },
-    { id: 70, name: "Brokoli Bawang Putih", price: 15000, category: "sayuran", description: "Brokoli bawang putih", rating: 4.1, page: 4 },
-    { id: 71, name: "Kangkung Terasi", price: 15000, category: "sayuran", description: "Kangkung terasi", rating: 4.3, page: 4 },
-    { id: 72, name: "Kangkung Ayam", price: 15000, category: "sayuran", description: "Kangkung ayam", rating: 4.2, page: 4 },
-    { id: 73, name: "Genjer Terasi", price: 15000, category: "sayuran", description: "Genjer terasi", rating: 4.2, page: 4 },
-    { id: 74, name: "Genjer Bawang Putih", price: 15000, category: "sayuran", description: "Genjer bawang putih", rating: 4.1, page: 4 },
-    { id: 75, name: "Capcay Polos", price: 15000, unit: "ekor", category: "sayuran", description: "Capcay polos per ekor", rating: 4.0, page: 4 },
-    { id: 76, name: "Toge Bawang Putih", price: 12000, category: "sayuran", description: "Toge bawang putih", rating: 4.0, page: 4 },
-    { id: 77, name: "Kangkung Bawang Putih", price: 10000, category: "sayuran", description: "Kangkung bawang putih", rating: 4.1, page: 4 },
-    { id: 78, name: "Nasi Goreng Seafood", price: 25000, category: "nasi", description: "Nasi goreng seafood", rating: 4.5, page: 4 },
-    { id: 79, name: "Nasi Goreng Nanas", price: 20000, category: "nasi", description: "Nasi goreng nanas", rating: 4.4, page: 4 },
-    { id: 80, name: "Nasi Goreng Ayam Original", price: 15000, category: "nasi", description: "Nasi goreng ayam original", rating: 4.3, page: 4 },
-    { id: 81, name: "Nasi Goreng Ayam Daun Jeruk", price: 18000, category: "nasi", description: "Nasi goreng ayam daun jeruk", rating: 4.4, page: 4 },
-    { id: 82, name: "Nasi Goreng Ayam Terasi", price: 18000, category: "nasi", description: "Nasi goreng ayam terasi", rating: 4.3, page: 4 },
-    { id: 83, name: "Pad Thai", price: 25000, category: "nasi", description: "Pad Thai khas Thailand", rating: 4.7, page: 4 },
-    { id: 84, name: "Mie Goreng Seafood", price: 25000, category: "nasi", description: "Mie goreng seafood", rating: 4.5, page: 4 },
-    { id: 85, name: "Mie Goreng Telor", price: 15000, category: "nasi", description: "Mie goreng telur", rating: 4.2, page: 4 },
-    
-    // ========== MINUMAN & PENUTUP ==========
-    { id: 86, name: "Coffee", price: 10000, category: "minuman", description: "Kopi Thai", rating: 4.3, page: 5 },
-    { id: 87, name: "Thai Tea", price: 22000, category: "minuman", description: "Teh Thai spesial", rating: 4.8, page: 5 },
-    { id: 88, name: "Aneka Jus", price: 15000, category: "minuman", description: "Jus buah segar", rating: 4.4, page: 5 },
-    { id: 89, name: "Kelapa Muda", price: 15000, category: "minuman", description: "Kelapa muda segar", rating: 4.5, page: 5 },
-    { id: 90, name: "Mango Sticky Rice", price: 15000, category: "dessert", description: "Mangga dengan ketan", rating: 4.7, page: 5 },
-    { id: 91, name: "Singkong Thailand", price: 15000, category: "dessert", description: "Singkong khas Thailand", rating: 4.5, page: 5 },
-    { id: 92, name: "Es Teler", price: 15000, category: "dessert", description: "Es teler special", rating: 4.6, page: 5 },
-    { id: 93, name: "Mocktail", price: 22000, category: "minuman", description: "Mocktail special", rating: 4.5, page: 5 },
-    { id: 94, name: "Mocktail Spesial", price: 28000, category: "minuman", description: "Mocktail spesial", rating: 4.7, page: 5 }
+    // ========== SEAFOOD MIX (PAKET) ==========
+    { id: 1, name: "Seafood Mix S (1-2 Orang)", price: 65000, category: "seafood", description: "Isi: Kepiting 1 ekor, Kerang ijo, Kerang dara, Cumi, Udang", rating: 4.7, page: 1 },
+    { id: 2, name: "Seafood Mix M (2-3 Orang)", price: 100000, category: "seafood", description: "Isi: Kepiting 1 ekor, Kerang ijo, Kerang dara, Cumi, Udang", rating: 4.8, page: 1 },
+    { id: 3, name: "Seafood Mix L (3-4 Orang)", price: 200000, category: "seafood", description: "Isi: Kepiting 2 ekor, Kerang ijo, Kerang dara, Cumi, Udang", rating: 4.9, page: 1 },
+
+    // ========== UDANG ==========
+    { id: 4, name: "Udang Saos Padang", price: 40000, category: "seafood", description: "Udang segar saus padang", rating: 4.5, page: 1 },
+    { id: 5, name: "Udang Goreng Tepung", price: 38000, category: "seafood", description: "Udang krispi", rating: 4.4, page: 1 },
+    { id: 6, name: "Udang Telor Asin", price: 40000, category: "seafood", description: "Udang saus telur asin", rating: 4.6, page: 1 },
+    { id: 7, name: "Udang Lada Garam", price: 40000, category: "seafood", description: "Udang tumis lada garam", rating: 4.4, page: 1 },
+    { id: 8, name: "Udang Saos Tiram", price: 40000, category: "seafood", description: "Udang saus tiram", rating: 4.3, page: 1 },
+    { id: 9, name: "Udang Balado", price: 40000, category: "seafood", description: "Udang bumbu balado", rating: 4.7, page: 1 },
+
+    // ========== CUMI & KERANG ==========
+    { id: 10, name: "Cumi Goreng Tepung", price: 35000, category: "seafood", description: "Cumi crispy", rating: 4.5, page: 1 },
+    { id: 11, name: "Cumi Lada Garam", price: 35000, category: "seafood", description: "Cumi tumis lada garam", rating: 4.4, page: 1 },
+    { id: 12, name: "Cumi Telor Asin", price: 35000, category: "seafood", description: "Cumi saus telur asin", rating: 4.6, page: 1 },
+    { id: 13, name: "Cumi Saos Padang", price: 35000, category: "seafood", description: "Cumi saus padang", rating: 4.5, page: 1 },
+    { id: 14, name: "Kerang Kepa", price: 25000, category: "seafood", description: "Pilihan: Saos Padang/Tiram", rating: 4.2, page: 1 },
+    { id: 15, name: "Kerang Batik", price: 25000, category: "seafood", description: "Pilihan: Saos Padang/Tiram", rating: 4.3, page: 1 },
+    { id: 16, name: "Kerang Ijo", price: 25000, category: "seafood", description: "Pilihan: Saos Padang/Tiram", rating: 4.4, page: 1 },
+
+    // ========== GURAME (PORSI) ==========
+    { id: 17, name: "Gurame Bakar Cabe Ijo", price: 35000, category: "ikan", description: "Gurame bakar bumbu cabe ijo", rating: 4.7, page: 2 },
+    { id: 18, name: "Gurame Bakar Terasi", price: 35000, category: "ikan", description: "Gurame bakar bumbu terasi", rating: 4.6, page: 2 },
+    { id: 19, name: "Gurame Bakar Kecap", price: 35000, category: "ikan", description: "Gurame bakar kecap manis", rating: 4.5, page: 2 },
+    { id: 20, name: "Gurame Bakar Sambel Bawang", price: 35000, category: "ikan", description: "Gurame bakar sambal bawang", rating: 4.4, page: 2 },
+    { id: 21, name: "Gurame Bakar Rica-rica", price: 35000, category: "ikan", description: "Gurame bakar rica pedas", rating: 4.6, page: 2 },
+    { id: 22, name: "Gurame Goreng Kering", price: 35000, category: "ikan", description: "Gurame goreng garing", rating: 4.3, page: 2 },
+    { id: 23, name: "Gurame Saos Bangkok", price: 35000, category: "ikan", description: "Gurame goreng saus Bangkok", rating: 4.5, page: 2 },
+    { id: 24, name: "Gurame Telor Asin", price: 35000, category: "ikan", description: "Gurame saus telur asin", rating: 4.6, page: 2 },
+    { id: 25, name: "Gurame Saos Mangga", price: 35000, category: "ikan", description: "Gurame dengan serutan mangga", rating: 4.4, page: 2 },
+    { id: 26, name: "Gurame Sambel Matah Thailand", price: 35000, category: "ikan", description: "Gurame matah khas Thai", rating: 4.7, page: 2 },
+
+    // ========== IKAN LAINNYA (ONS/PORSI) ==========
+    { id: 27, name: "Bawal Bakar", price: 85000, category: "ikan", description: "Semua varian bumbu", rating: 4.7, page: 2 },
+    { id: 28, name: "Nila Bakar", price: 25000, category: "ikan", description: "Semua varian bumbu", rating: 4.4, page: 2 },
+    { id: 29, name: "Nila Goreng Kering", price: 25000, category: "ikan", description: "Nila goreng garing", rating: 4.2, page: 2 },
+    { id: 30, name: "Kakap Bakar/Goreng", price: 14000, unit: "ons", category: "ikan", description: "Harga per ons", rating: 4.5, page: 2 },
+    { id: 31, name: "Kakap Steam Lemon", price: 14000, unit: "ons", category: "ikan", description: "Steam asam segar per ons", rating: 4.8, page: 2 },
+    { id: 32, name: "Kakap Steam Tomyum", price: 14000, unit: "ons", category: "ikan", description: "Steam pedas tom yum per ons", rating: 4.7, page: 2 },
+    { id: 33, name: "Kakap Steam Soya", price: 14000, unit: "ons", category: "ikan", description: "Steam kecap asin per ons", rating: 4.6, page: 2 },
+    { id: 34, name: "Salem Bakar", price: 8000, unit: "ons", category: "ikan", description: "Ikan salem bakar per ons", rating: 4.3, page: 2 },
+    { id: 35, name: "Kakap Baramundi Garam Thailand", price: 15000, unit: "ons", category: "ikan", description: "Spesial Baramundi per ons", rating: 4.9, page: 2 },
+
+    // ========== TOM YUM & SALAD ==========
+    { id: 36, name: "Mama Tomyum Seafood", price: 45000, category: "soup", description: "Tomyum porsi besar", rating: 4.9, page: 3 },
+    { id: 37, name: "Tom Yum Seafood", price: 40000, category: "soup", description: "Isian udang, cumi, ikan", rating: 4.8, page: 3 },
+    { id: 38, name: "Tom Yum Ikan", price: 40000, category: "soup", description: "Tom yum daging ikan", rating: 4.5, page: 3 },
+    { id: 39, name: "Tom Yum Ayam", price: 35000, category: "soup", description: "Tom yum daging ayam", rating: 4.5, page: 3 },
+    { id: 40, name: "Pepaya Salad (Somtam)", price: 15000, category: "salad", description: "Salad pepaya Thailand", rating: 4.4, page: 3 },
+    { id: 41, name: "Mangga Salad", price: 15000, category: "salad", description: "Salad mangga segar", rating: 4.4, page: 3 },
+
+    // ========== BASIL & MIE ==========
+    { id: 42, name: "Basil Ayam", price: 20000, category: "basil", description: "Ayam tumis kemangi Thai", rating: 4.7, page: 3 },
+    { id: 43, name: "Basil Kerang Batik", price: 20000, category: "basil", description: "Kerang tumis kemangi Thai", rating: 4.6, page: 3 },
+    { id: 44, name: "Pad Thai", price: 25000, category: "mie", description: "Kweteiau goreng Thai", rating: 4.8, page: 3 },
+    { id: 45, name: "Mie Goreng Seafood", price: 25000, category: "mie", description: "Mie goreng isian laut", rating: 4.5, page: 3 },
+
+    // ========== SAYURAN ==========
+    { id: 46, name: "Kangkung Bawang Putih", price: 10000, category: "sayuran", description: "Tumis kangkung polos", rating: 4.1, page: 4 },
+    { id: 47, name: "Kangkung Terasi", price: 15000, category: "sayuran", description: "Tumis kangkung terasi", rating: 4.3, page: 4 },
+    { id: 48, name: "Kailan Ayam", price: 18000, category: "sayuran", description: "Tumis kailan & ayam", rating: 4.3, page: 4 },
+    { id: 49, name: "Brokoli Ayam", price: 18000, category: "sayuran", description: "Tumis brokoli & ayam", rating: 4.3, page: 4 },
+    { id: 50, name: "Capcay Ayam", price: 18000, category: "sayuran", description: "Sayur campur ayam", rating: 4.2, page: 4 },
+    { id: 51, name: "Capcay Udang", price: 20000, category: "sayuran", description: "Sayur campur udang", rating: 4.4, page: 4 },
+
+    // ========== NASI & PAKET ==========
+    { id: 52, name: "Nasi Goreng Seafood", price: 25000, category: "nasi", description: "Nasi goreng udang cumi", rating: 4.5, page: 4 },
+    { id: 53, name: "Nasi Goreng Nanas", price: 20000, category: "nasi", description: "Nasi goreng nanas Thai", rating: 4.6, page: 4 },
+    { id: 54, name: "Nasi Goreng Ayam", price: 15000, category: "nasi", description: "Nasi goreng ayam original", rating: 4.3, page: 4 },
+    { id: 55, name: "Nasi Putih", price: 5000, category: "pelengkap", description: "Nasi putih hangat", rating: 4.0, page: 1 },
+    { id: 56, name: "Paket Nasi Basil Ayam + Telor + Es Teh", price: 27000, category: "paket", description: "Hemat & lengkap", rating: 4.8, page: 1 },
+
+    // ========== SAMBAL (5 RIBU) ==========
+    { id: 57, name: "Sambel Rica-rica", price: 5000, category: "sambal", description: "Pedas rica", rating: 4.5, page: 1 },
+    { id: 58, name: "Sambel Bawang", price: 5000, category: "sambal", description: "Gurih bawang", rating: 4.5, page: 1 },
+    { id: 59, name: "Sambal Terasi", price: 5000, category: "sambal", description: "Aroma terasi", rating: 4.5, page: 1 },
+    { id: 60, name: "Sambel Cabe Ijo", price: 5000, category: "sambal", description: "Pedas cabe ijo", rating: 4.5, page: 1 },
+
+    // ========== MINUMAN ==========
+    { id: 61, name: "Thai Tea", price: 22000, category: "minuman", description: "Teh susu khas Thai", rating: 4.9, page: 5 },
+    { id: 62, name: "Thai Green Tea", price: 22000, category: "minuman", description: "Teh hijau susu Thai", rating: 4.8, page: 5 },
+    { id: 63, name: "Thai Coffee", price: 22000, category: "minuman", description: "Kopi susu khas Thai", rating: 4.7, page: 5 },
+    { id: 64, name: "Es Teh Manis", price: 7000, category: "minuman", description: "Es teh manis segar", rating: 4.2, page: 5 },
+    { id: 65, name: "Jus Alpukat", price: 15000, category: "minuman", description: "Jus buah segar", rating: 4.5, page: 5 },
+    { id: 66, name: "Jus Mangga", price: 15000, category: "minuman", description: "Jus buah segar", rating: 4.5, page: 5 },
+    { id: 67, name: "Kelapa Muda Batok", price: 15000, category: "minuman", description: "Kelapa segar asli", rating: 4.6, page: 5 },
+    { id: 68, name: "Mocktail Sunset Island", price: 28000, category: "minuman", description: "Minuman segar dingin", rating: 4.7, page: 5 },
+
+    // ========== DESSERT ==========
+    { id: 69, name: "Mango Sticky Rice", price: 15000, category: "dessert", description: "Ketan mangga manis", rating: 4.8, page: 5 },
+    { id: 70, name: "Singkong Thailand", price: 15000, category: "dessert", description: "Singkong manis vla santan", rating: 4.7, page: 5 },
+    { id: 71, name: "Es Teler", price: 15000, category: "dessert", description: "Es teler spesial", rating: 4.6, page: 5 },
+    { id: 72, name: "Es Red Rubbies", price: 15000, category: "dessert", description: "Dessert delima Thailand", rating: 4.7, page: 5 }
 ];
+
 
 // VARIABEL GLOBAL
 let cart = JSON.parse(localStorage.getItem('sariSeafoodCart')) || [];
