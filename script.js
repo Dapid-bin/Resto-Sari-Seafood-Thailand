@@ -1,77 +1,204 @@
-:root {
-    --primary: #dc2626;
-    --accent: #f59e0b;
-    --dark: #0f172a;
-    --light: #f8fafc;
-    --success: #25d366;
-    --radius: 12px;
-    --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+// DATABASE (Potongan Contoh - Pastikan ID unik dan urut)
+const menuItems = [
+    { id: 1, name: "Paket Seafood Mix S", price: 65000, page: 1, desc: "Kerang ijo, dara, cumi, udang" },
+    { id: 2, name: "Gurame Bakar Cabe Ijo", price: 35000, page: 2, desc: "Gurame segar dengan sambal ijo" },
+    { id: 87, name: "Thai Tea", price: 22000, page: 5, desc: "Teh Thailand autentik" }
+    // Tambahkan menu lainnya di sini...
+];
+
+let cart = JSON.parse(localStorage.getItem('sariSeafoodCart')) || [];
+let currentPage = 1;
+const totalPages = 20;
+
+// INITIALIZE
+document.addEventListener('DOMContentLoaded', () => {
+    renderBookPages();
+    renderThumbnails();
+    updateOrderSummary();
+    updateStatus();
+    initSearch();
+    
+    // Navigasi Tombol
+    document.getElementById('prevPage').onclick = () => changePage(-1);
+    document.getElementById('nextPage').onclick = () => changePage(1);
+    document.getElementById('openMapBtn').onclick = () => document.getElementById('mapModal').style.display = 'flex';
+    document.getElementById('closeMapModal').onclick = () => document.getElementById('mapModal').style.display = 'none';
+    document.getElementById('clearOrder').onclick = clearCart;
+});
+
+// BOOK LOGIC
+function renderBookPages() {
+    const container = document.getElementById('bookContainer');
+    for (let i = 1; i <= totalPages; i++) {
+        const img = document.createElement('img');
+        img.src = `./assets/images/menu-page-${i}.jpg`;
+        img.className = `book-page ${i === 1 ? 'active' : ''}`;
+        img.dataset.page = i;
+        container.appendChild(img);
+    }
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body { font-family: 'Inter', sans-serif; background-color: #0b1120; color: var(--light); line-height: 1.6; }
-.container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+function renderThumbnails() {
+    const container = document.getElementById('thumbnailsContainer');
+    for (let i = 1; i <= totalPages; i++) {
+        const thumb = document.createElement('img');
+        thumb.src = `./assets/images/menu-page-${i}.jpg`;
+        thumb.className = `thumbnail ${i === 1 ? 'active' : ''}`;
+        thumb.onclick = () => { currentPage = i; updateBookView(); };
+        container.appendChild(thumb);
+    }
+}
 
-/* Header & Status */
-.header { padding: 15px 0; background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(255,255,255,0.1); }
-.header .container { display: flex; justify-content: space-between; align-items: center; }
-.logo { width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--accent); }
-.logo-container { display: flex; align-items: center; gap: 12px; }
-.logo-text h1 { font-size: 1.2rem; }
-.status-badge { font-size: 0.8rem; display: flex; align-items: center; gap: 6px; background: #1e293b; padding: 5px 12px; border-radius: 20px; }
-.status-dot { width: 8px; height: 8px; border-radius: 50%; background: #64748b; }
-.status-dot.open { background: var(--success); box-shadow: 0 0 8px var(--success); }
+function changePage(dir) {
+    currentPage += dir;
+    if (currentPage < 1) currentPage = 1;
+    if (currentPage > totalPages) currentPage = totalPages;
+    updateBookView();
+}
 
-/* Hero */
-.hero { padding: 40px 0; text-align: center; background: linear-gradient(to bottom, #0f172a, #0b1120); }
-.hero h2 { font-size: 2.2rem; background: linear-gradient(to right, #f59e0b, #dc2626); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
-.info-grid { display: flex; gap: 15px; justify-content: center; margin: 25px 0; flex-wrap: wrap; }
-.info-card { background: #1e293b; padding: 15px; border-radius: var(--radius); min-width: 200px; text-align: left; border-left: 4px solid var(--accent); }
-.hero-cta-btn { display: inline-block; padding: 12px 25px; background: var(--primary); color: white; text-decoration: none; border-radius: 30px; font-weight: bold; transition: 0.3s; }
-.hero-cta-btn:hover { transform: translateY(-3px); background: #b91c1c; }
+function updateBookView() {
+    document.querySelectorAll('.book-page').forEach(p => p.classList.remove('active'));
+    document.querySelector(`.book-page[data-page="${currentPage}"]`).classList.add('active');
+    
+    document.querySelectorAll('.thumbnail').forEach((t, i) => {
+        t.classList.toggle('active', i + 1 === currentPage);
+        if(i + 1 === currentPage) t.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+    
+    document.getElementById('currentPage').textContent = currentPage;
+}
 
-/* Book Viewer */
-.book-viewer { margin-top: 20px; }
-.book-page-container { position: relative; width: 100%; height: 450px; background: #1e293b; border-radius: var(--radius); overflow: hidden; }
-.book-page { position: absolute; width: 100%; height: 100%; object-fit: contain; opacity: 0; transition: 0.4s ease; background: white; }
-.book-page.active { opacity: 1; }
-.page-thumbnails { display: flex; gap: 10px; overflow-x: auto; padding: 15px 0; scrollbar-width: none; }
-.thumbnail { width: 60px; height: 80px; object-fit: cover; border-radius: 4px; opacity: 0.5; cursor: pointer; transition: 0.3s; flex-shrink: 0; }
-.thumbnail.active { opacity: 1; border: 2px solid var(--accent); transform: scale(1.1); }
+// SEARCH LOGIC
+function initSearch() {
+    const input = document.getElementById('menuSearch');
+    const results = document.getElementById('searchResults');
+    
+    input.oninput = () => {
+        const val = input.value.toLowerCase();
+        results.innerHTML = '';
+        if (val.length < 2) { results.style.display = 'none'; return; }
+        
+        const filtered = menuItems.filter(m => m.name.toLowerCase().includes(val));
+        if (filtered.length > 0) {
+            results.style.display = 'block';
+            filtered.forEach(m => {
+                const div = document.createElement('div');
+                div.className = 'search-result-item';
+                div.innerHTML = `
+                    <div>
+                        <h4>${m.name}</h4>
+                        <small>Rp ${m.price.toLocaleString()} | Hal ${m.page}</small>
+                    </div>
+                    <button class="add-from-search" onclick="addToCart(${m.id})"><i class="fas fa-plus"></i></button>
+                `;
+                results.appendChild(div);
+            });
+        }
+    };
+}
 
-/* Search */
-.search-section { margin-top: 30px; position: relative; }
-.search-box { position: relative; }
-.search-box i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #64748b; }
-#menuSearch { width: 100%; padding: 15px 15px 15px 45px; border-radius: 30px; border: 1px solid #334155; background: #1e293b; color: white; font-size: 1rem; }
-.search-results { background: #1e293b; border-radius: var(--radius); margin-top: 10px; max-height: 300px; overflow-y: auto; display: none; border: 1px solid #334155; }
-.search-result-item { padding: 15px; border-bottom: 1px solid #334155; display: flex; justify-content: space-between; align-items: center; }
-.search-result-item h4 { font-size: 0.95rem; }
-.add-from-search { background: var(--success); border: none; color: white; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; }
+// CART LOGIC
+function addToCart(id) {
+    const item = menuItems.find(m => m.id === id);
+    const existing = cart.find(c => c.id === id);
+    
+    if (existing) {
+        existing.qty++;
+    } else {
+        cart.push({ ...item, qty: 1 });
+    }
+    
+    saveAndRefresh();
+    notify(`✅ ${item.name} ditambah!`);
+}
 
-/* Order Summary */
-.order-summary { background: #1e293b; padding: 25px; border-radius: var(--radius); margin-top: 40px; }
-.order-list { list-style: none; margin: 20px 0; }
-.order-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px dotted #334155; }
-.quantity-controls { display: flex; align-items: center; gap: 10px; }
-.qty-btn { background: #334155; border: none; color: white; width: 25px; height: 25px; border-radius: 4px; cursor: pointer; }
-.order-total { padding-top: 20px; border-top: 2px solid #334155; }
-.total-row { display: flex; justify-content: space-between; margin-bottom: 10px; color: #94a3b8; }
-.total-row.main { font-size: 1.5rem; font-weight: bold; color: var(--accent); }
-.wa-btn-order { display: block; background: var(--success); color: white; text-align: center; padding: 15px; border-radius: var(--radius); text-decoration: none; font-weight: bold; margin-top: 15px; }
+function updateQty(id, delta) {
+    const item = cart.find(c => c.id === id);
+    if (item) {
+        item.qty += delta;
+        if (item.qty <= 0) cart = cart.filter(c => c.id !== id);
+        saveAndRefresh();
+    }
+}
 
-/* Floating Cart */
-.floating-cart { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--accent); color: var(--dark); padding: 12px 25px; border-radius: 50px; font-weight: bold; display: flex; align-items: center; gap: 10px; text-decoration: none; transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 99; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
-.floating-cart.show { transform: translateX(-50%) translateY(0); }
+function clearCart() {
+    if(confirm("Hapus semua pesanan?")) {
+        cart = [];
+        saveAndRefresh();
+    }
+}
 
-/* Modal & Notification */
-.modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:1001; justify-content:center; align-items:center; }
-.modal-content { background:#1e293b; width:90%; max-width:600px; border-radius:var(--radius); position:relative; overflow:hidden; }
-.notification { position: fixed; top: 20px; right: 20px; background: var(--accent); color: var(--dark); padding: 12px 20px; border-radius: 8px; font-weight: bold; transform: translateX(200%); transition: 0.4s; z-index: 9999; }
-.notification.show { transform: translateX(0); }
+function saveAndRefresh() {
+    localStorage.setItem('sariSeafoodCart', JSON.stringify(cart));
+    updateOrderSummary();
+}
 
-@media (max-width: 600px) {
-    .book-page-container { height: 280px; }
-    .hero h2 { font-size: 1.6rem; }
+function updateOrderSummary() {
+    const list = document.getElementById('orderList');
+    const totalCont = document.getElementById('orderTotalContainer');
+    const emptyText = document.getElementById('emptyOrderText');
+    const floatCart = document.getElementById('floatingCart');
+    
+    list.innerHTML = '';
+    let totalItems = 0;
+    let totalPrice = 0;
+
+    cart.forEach(item => {
+        totalItems += item.qty;
+        totalPrice += (item.price * item.qty);
+        
+        const li = document.createElement('li');
+        li.className = 'order-item';
+        li.innerHTML = `
+            <div>
+                <strong>${item.name}</strong><br>
+                <small>Rp ${item.price.toLocaleString()}</small>
+            </div>
+            <div class="quantity-controls">
+                <button class="qty-btn" onclick="updateQty(${item.id}, -1)">-</button>
+                <span>${item.qty}</span>
+                <button class="qty-btn" onclick="updateQty(${item.id}, 1)">+</button>
+            </div>
+        `;
+        list.appendChild(li);
+    });
+
+    emptyText.style.display = cart.length ? 'none' : 'block';
+    totalCont.style.display = cart.length ? 'block' : 'none';
+    document.getElementById('totalItems').textContent = totalItems;
+    document.getElementById('totalPrice').textContent = `Rp ${totalPrice.toLocaleString()}`;
+    document.getElementById('floatCartCount').textContent = totalItems;
+    
+    // Tampilkan tombol melayang jika ada isi
+    floatCart.classList.toggle('show', totalItems > 0);
+
+    // Update WA Link
+    updateWaLink(totalPrice);
+}
+
+function updateWaLink(total) {
+    let msg = "Halo Sari Seafood Thailand, saya mau pesan:\n\n";
+    cart.forEach((c, i) => {
+        msg += `${i+1}. ${c.name} (${c.qty}x)\n`;
+    });
+    msg += `\nTotal: Rp ${total.toLocaleString()}\n\nNama: \nAlamat: `;
+    document.getElementById('orderWaBtn').href = `https://wa.me/6287771050628?text=${encodeURIComponent(msg)}`;
+}
+
+// UI UTILS
+function notify(msg) {
+    const n = document.getElementById('notification');
+    n.textContent = msg;
+    n.classList.add('show');
+    setTimeout(() => n.classList.remove('show'), 3000);
+}
+
+function updateStatus() {
+    const hour = new Date().getHours();
+    const isOpen = hour >= 9 && hour < 22;
+    const dot = document.querySelector('.status-dot');
+    const text = document.querySelector('.status-text');
+    
+    dot.className = `status-dot ${isOpen ? 'open' : ''}`;
+    text.textContent = isOpen ? 'BUKA SEKARANG' : 'TUTUP';
 }
