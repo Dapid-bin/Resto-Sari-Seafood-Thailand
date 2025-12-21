@@ -12,14 +12,13 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
-    <!-- HEADER & NAV -->
     <header class="header">
         <div class="container">
             <div class="logo-container">
                 <img src="./assets/images/logo.jpg" alt="Sari Seafood Thailand" class="logo">
                 <div class="logo-text">
-                    <h1>Sari Seafood Thailand</h1>
-                    <p class="tagline">Citarasa Autentik Thailand di Bogor</p>
+                    <h1>Sari Seafood</h1>
+                    <p class="tagline">Citarasa Autentik Thailand</p>
                 </div>
             </div>
             <div class="status-badge" id="statusBadge">
@@ -29,281 +28,111 @@
         </div>
     </header>
 
-    <!-- HERO & INFO -->
     <section class="hero">
         <div class="container">
             <div class="hero-info">
                 <h2>Digital Menu Book</h2>
-                <p>Lihat halaman menu, ketik nama menu yang ingin dipesan!</p>
+                <p>Cari menu favorit Anda dan pesan langsung via WhatsApp!</p>
                 
                 <div class="info-grid">
                     <div class="info-card">
                         <i class="fas fa-map-marker-alt"></i>
                         <div>
                             <h4>Lokasi</h4>
-                            <p>Jl. Raya Cibeber, Leuwisadeng, Bogor</p>
-                            <button class="map-btn" id="openMapBtn">
-                                <i class="fas fa-map"></i> Lihat Peta
-                            </button>
+                            <p>Leuwisadeng, Bogor</p>
+                            <button class="map-btn" id="openMapBtn">Lihat Peta</button>
                         </div>
                     </div>
                     <div class="info-card">
                         <i class="fas fa-clock"></i>
                         <div>
-                            <h4>Jam Operasional</h4>
-                            <p><strong id="hoursText">09:00 - 22:00 WIB</strong></p>
+                            <h4>Jam Buka</h4>
+                            <p id="hoursText">09:00 - 22:00 WIB</p>
                             <p class="status-dynamic" id="nextStatus"></p>
                         </div>
                     </div>
-                    <div class="info-card">
-                        <i class="fas fa-phone-alt"></i>
-                        <div>
-                            <h4>Pesan Sekarang</h4>
-                            <p><a href="tel:+6287771050628">+62 877-7105-0628</a></p>
-                            <p class="whatsapp-link">
-                                <i class="fab fa-whatsapp"></i> WhatsApp Order
-                            </p>
-                        </div>
-                    </div>
                 </div>
                 
-                <a href="https://wa.me/6287771050628?text=Halo%20Sari%20Seafood,%20saya%20mau%20pesan%20..." 
-                   class="wa-btn-hero" target="_blank" id="mainWaBtn">
-                    <i class="fab fa-whatsapp"></i> Pesan via WhatsApp
+                <a href="#orderSummary" class="hero-cta-btn">
+                    <i class="fas fa-utensils"></i> Lihat Pesanan Saya
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- SOCIAL BAR -->
-    <section class="social-bar">
-        <div class="container">
-            <p class="social-title">Ikuti Kami:</p>
-            <div class="social-icons">
-                <a href="https://youtube.com/@david_world_news?si=eUJZEQqpMV064onj" target="_blank" class="social-icon">
-                    <i class="fab fa-youtube"></i>
-                </a>
-                <a href="https://www.instagram.com/restosariseafood?igsh=bGhiN2VzN3V4bmVq" target="_blank" class="social-icon">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://www.facebook.com/share/17wP7tSWiu/" target="_blank" class="social-icon">
-                    <i class="fab fa-facebook"></i>
-                </a>
-                <a href="https://www.tiktok.com/@restoseathai1?_r=1&_t=ZS-92KCwZNNCfU" target="_blank" class="social-icon">
-                    <i class="fab fa-tiktok"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- MENU BOOK SECTION -->
-    <section class="menu-book-section">
+    <section class="menu-book-section" id="menu">
         <div class="container">
             <div class="section-header">
-                <h2><i class="fas fa-book-open"></i> Buku Menu Digital</h2>
-                <p>Scroll untuk lihat semua halaman menu (20 halaman)</p>
+                <h2><i class="fas fa-book-open"></i> Halaman Menu</h2>
+                <p>Geser atau klik thumbnail untuk melihat halaman lain</p>
             </div>
             
-            <!-- BOOK NAVIGATION -->
             <div class="book-navigation">
-                <button class="book-nav-btn" id="prevPage">
-                    <i class="fas fa-chevron-left"></i> Sebelumnya
-                </button>
-                <span class="page-indicator">Halaman <span id="currentPage">1</span> dari 20</span>
-                <button class="book-nav-btn" id="nextPage">
-                    Selanjutnya <i class="fas fa-chevron-right"></i>
-                </button>
+                <button class="book-nav-btn" id="prevPage"><i class="fas fa-chevron-left"></i></button>
+                <span class="page-indicator">Halaman <span id="currentPage">1</span> / 20</span>
+                <button class="book-nav-btn" id="nextPage"><i class="fas fa-chevron-right"></i></button>
             </div>
             
-            <!-- BOOK VIEWER -->
             <div class="book-viewer">
-                <div class="book-page-container">
-                    <img src="./assets/images/menu-page-1.jpg" alt="Halaman Menu 1" class="book-page active" data-page="1">
-                    <img src="./assets/images/menu-page-2.jpg" alt="Halaman Menu 2" class="book-page" data-page="2">
-                    <img src="./assets/images/menu-page-3.jpg" alt="Halaman Menu 3" class="book-page" data-page="3">
-                    <img src="./assets/images/menu-page-4.jpg" alt="Halaman Menu 4" class="book-page" data-page="4">
-                    <img src="./assets/images/menu-page-5.jpg" alt="Halaman Menu 5" class="book-page" data-page="5">
-                    <img src="./assets/images/menu-page-6.jpg" alt="Halaman Menu 6" class="book-page" data-page="6">
-                    <img src="./assets/images/menu-page-7.jpg" alt="Halaman Menu 7" class="book-page" data-page="7">
-                    <img src="./assets/images/menu-page-8.jpg" alt="Halaman Menu 8" class="book-page" data-page="8">
-                    <img src="./assets/images/menu-page-9.jpg" alt="Halaman Menu 9" class="book-page" data-page="9">
-                    <img src="./assets/images/menu-page-10.jpg" alt="Halaman Menu 10" class="book-page" data-page="10">
-                    <img src="./assets/images/menu-page-11.jpg" alt="Halaman Menu 11" class="book-page" data-page="11">
-                    <img src="./assets/images/menu-page-12.jpg" alt="Halaman Menu 12" class="book-page" data-page="12">
-                    <img src="./assets/images/menu-page-13.jpg" alt="Halaman Menu 13" class="book-page" data-page="13">
-                    <img src="./assets/images/menu-page-14.jpg" alt="Halaman Menu 14" class="book-page" data-page="14">
-                    <img src="./assets/images/menu-page-15.jpg" alt="Halaman Menu 15" class="book-page" data-page="15">
-                    <img src="./assets/images/menu-page-16.jpg" alt="Halaman Menu 16" class="book-page" data-page="16">
-                    <img src="./assets/images/menu-page-17.jpg" alt="Halaman Menu 17" class="book-page" data-page="17">
-                    <img src="./assets/images/menu-page-18.jpg" alt="Halaman Menu 18" class="book-page" data-page="18">
-                    <img src="./assets/images/menu-page-19.jpg" alt="Halaman Menu 19" class="book-page" data-page="19">
-                    <img src="./assets/images/menu-page-20.jpg" alt="Halaman Menu 20" class="book-page" data-page="20">
-                </div>
-                
-                <!-- PAGE THUMBNAILS -->
-                <div class="page-thumbnails">
-                    <div class="thumbnails-container" id="thumbnailsContainer">
-                        <!-- Thumbnails akan di-generate oleh JavaScript -->
+                <div class="book-page-container" id="bookContainer">
                     </div>
-                </div>
+                <div class="page-thumbnails" id="thumbnailsContainer"></div>
             </div>
-            
-            <!-- SEARCH SECTION -->
+
             <div class="search-section">
-                <div class="search-header">
-                    <h3><i class="fas fa-search"></i> Cari Menu dari Halaman di Atas</h3>
-                    <p>Ketik nama menu yang dilihat di buku menu</p>
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="menuSearch" placeholder="Cari menu (contoh: Udang, Gurame...)" autocomplete="off">
                 </div>
-                
-                <div class="search-container">
-                    <div class="search-box">
-                        <i class="fas fa-search"></i>
-                        <input type="text" id="menuSearch" placeholder="Contoh: 'Paket Seafood Mix S' atau 'Udang Saos Padang'" autocomplete="off">
-                        <button class="search-btn" id="searchBtn">Cari</button>
-                    </div>
-                    
-                    <div class="search-tips">
-                        <p><i class="fas fa-lightbulb"></i> Tips: Ketik minimal 3 huruf untuk mencari menu</p>
-                    </div>
-                    
-                    <div class="search-results" id="searchResults">
-                        <!-- Hasil pencarian akan muncul di sini -->
-                    </div>
-                </div>
+                <div class="search-results" id="searchResults"></div>
             </div>
         </div>
     </section>
 
-    <!-- ORDER SUMMARY -->
-    <section class="order-section">
+    <section class="order-section" id="orderSummary">
         <div class="container">
-            <div class="order-summary" id="orderSummary">
+            <div class="order-summary">
                 <div class="summary-header">
-                    <h3><i class="fas fa-shopping-cart"></i> Ringkasan Pesanan</h3>
-                    <div class="summary-controls">
-                        <button class="clear-btn" id="clearOrder">
-                            <i class="fas fa-trash"></i> Hapus Semua
-                        </button>
-                        <div class="cart-counter" id="cartCounter">0</div>
-                    </div>
+                    <h3><i class="fas fa-shopping-cart"></i> Keranjang</h3>
+                    <button class="clear-btn" id="clearOrder">Hapus Semua</button>
                 </div>
-                <div class="summary-content">
-                    <p class="empty-order" id="emptyOrderText">
-                        <i class="fas fa-shopping-basket"></i><br>
-                        Belum ada menu dipilih.<br>
-                        Cari menu di atas dan klik tombol <strong>+</strong> untuk menambahkan.
-                    </p>
-                    <ul class="order-list" id="orderList"></ul>
-                    <div class="order-total" id="orderTotalContainer">
-                        <div class="total-details">
-                            <p>Total Item: <span id="totalItems">0</span></p>
-                            <p>Total Harga:</p>
-                        </div>
-                        <div class="total-price">
-                            <span id="totalPrice">Rp 0</span>
-                        </div>
+                <div id="emptyOrderText" class="empty-order">
+                    <i class="fas fa-shopping-basket"></i>
+                    <p>Keranjang masih kosong</p>
+                </div>
+                <ul class="order-list" id="orderList"></ul>
+                <div class="order-total" id="orderTotalContainer" style="display:none">
+                    <div class="total-row">
+                        <span>Total Item:</span>
+                        <span id="totalItems">0</span>
+                    </div>
+                    <div class="total-row main">
+                        <span>Total Harga:</span>
+                        <span id="totalPrice">Rp 0</span>
                     </div>
                     <a href="#" class="wa-btn-order" id="orderWaBtn" target="_blank">
-                        <i class="fab fa-whatsapp"></i> Kirim Pesanan via WhatsApp
+                        <i class="fab fa-whatsapp"></i> Kirim Pesanan Sekarang
                     </a>
-                    <p class="order-note">
-                        <i class="fas fa-info-circle"></i> Pesanan akan dikirim ke WhatsApp kami. 
-                        Silakan isi nama dan alamat saat chat.
-                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- GOOGLE MAPS SECTION -->
-    <section class="map-section">
-        <div class="container">
-            <div class="section-header">
-                <h2><i class="fas fa-map-marker-alt"></i> Lokasi Kami</h2>
-                <p>Kunjungi langsung restoran kami di Bogor</p>
-            </div>
-            
-            <div class="map-container">
-                <div class="map-info">
-                    <h3><i class="fas fa-utensils"></i> Sari Seafood Thailand</h3>
-                    <p><i class="fas fa-map-pin"></i> <strong>Alamat:</strong> Jl. Raya Cibeber, Leuwisadeng, Bogor, Jawa Barat</p>
-                    <p><i class="fas fa-clock"></i> <strong>Jam Buka:</strong> Setiap Hari 09:00 - 22:00 WIB</p>
-                    <p><i class="fas fa-phone"></i> <strong>Telepon:</strong> <a href="tel:+6287771050628">+62 877-7105-0628</a></p>
-                    <p><i class="fab fa-whatsapp"></i> <strong>WhatsApp:</strong> <a href="https://wa.me/6287771050628">+62 877-7105-0628</a></p>
-                    
-                    <a href="https://maps.app.goo.gl/cW7BtKZ2W681kfss8?g_st=awb" class="directions-btn" target="_blank">
-                        <i class="fas fa-directions"></i> Dapatkan Petunjuk Arah
-                    </a>
-                </div>
-                
-                <div class="map-embed">
-                    <div id="googleMap"></div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <a href="#orderSummary" class="floating-cart" id="floatingCart">
+        <i class="fas fa-shopping-basket"></i>
+        <span>Keranjang (<span id="floatCartCount">0</span>)</span>
+    </a>
 
-    <!-- FOOTER -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <img src="./assets/images/logo.jpg" alt="Logo" class="footer-logo-img">
-                    <div>
-                        <h3>Sari Seafood Thailand</h3>
-                        <p>Leuwisadeng, Bogor</p>
-                        <p class="footer-status" id="footerStatus"></p>
-                    </div>
-                </div>
-                
-                <div class="footer-hours">
-                    <h4>Jam Buka</h4>
-                    <p><i class="fas fa-clock"></i> Setiap Hari: 09:00 - 22:00 WIB</p>
-                    <p><i class="fas fa-car"></i> Tersedia tempat parkir</p>
-                    <p><i class="fas fa-wifi"></i> Delivery system buy in home</p>
-                </div>
-                
-                <div class="footer-contact">
-                    <h4>Kontak & Sosial Media</h4>
-                    <p><a href="tel:+6287771050628"><i class="fas fa-phone"></i> +62 877-7105-0628</a></p>
-                    <p><a href="https://wa.me/6287771050628" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp Order</a></p>
-                    <p><a href="https://www.instagram.com/restosariseafood" target="_blank"><i class="fab fa-instagram"></i> @restosariseafood</a></p>
-                </div>
-                
-                <div class="footer-payment">
-                    <h4>Metode Pembayaran</h4>
-                    <div class="payment-methods">
-                        <span class="payment-method"><i class="fas fa-money-bill-wave"></i> Tunai</span>
-                        <span class="payment-method"><i class="fas fa-qrcode"></i> QRIS</span>
-                        <span class="payment-method"><i class="fab fa-gopuram"></i> E-wallet</span>
-                        <span class="payment-method"><i class="fab fa-cc-mastercard"></i> BCA/BRI</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2025 Sari Seafood Thailand. All rights reserved.</p>
-                <p class="powered-by">Digital Menu by <strong>KGROUP-DAPID</strong></p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- MAP MODAL -->
     <div class="modal" id="mapModal">
         <div class="modal-content">
             <span class="close-modal" id="closeMapModal">&times;</span>
-            <h3><i class="fas fa-map-marker-alt"></i> Lokasi Sari Seafood Thailand</h3>
-            <div class="modal-map" id="modalMap"></div>
+            <div id="modalMap" style="height: 400px; width: 100%;"></div>
             <div class="modal-actions">
-                <a href="https://maps.app.goo.gl/cW7BtKZ2W681kfss8?g_st=awb" class="directions-btn" target="_blank">
-                    <i class="fas fa-directions"></i> Buka di Google Maps
-                </a>
-                <button class="close-btn" id="closeModalBtn">Tutup</button>
+                <a href="https://maps.google.com/?q=Sari+Seafood+Thailand+Leuwisadeng" target="_blank" class="directions-btn">Google Maps</a>
             </div>
         </div>
     </div>
 
-    <!-- NOTIFICATION -->
     <div class="notification" id="notification"></div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
